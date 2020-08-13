@@ -6,18 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>zzq_blog</title>
+  <title>IWIP TCP/IP笔记 | zzq_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CSS 404滚动框   body {   background: #000;   height: 100vh;   overflow: hidden;   display: flex;   font-family: &#39;Anton&#39;, sans-serif;   justify-content: center;   align-items: center;   -webkit-perspe">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zzq_blog">
-<meta property="og:url" content="http://yoursite.com/404.html">
+  <meta name="description" content="文章概述 对于IWIP协议的介绍，属于一个笔记的一个功能 主要的一个功能是方便自己的理解和查阅，所作的介绍或者解释都是自己在网络上或者自己遇到的一些情况的一个笔记！ 什么是IWIP?简介我们百度一下IWIP：百度给的解释如下wIP是Light Weight (轻型)IP协议，有无操作系统的支持都可以运行。LwIP实现的重点是在保持TCP协议主要功能的基础上减少对RAM 的占用，它只需十几KB的RA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IWIP TCP&#x2F;IP笔记">
+<meta property="og:url" content="http://yoursite.com/2020/08/13/TCP-IP%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="zzq_blog">
-<meta property="og:description" content="CSS 404滚动框   body {   background: #000;   height: 100vh;   overflow: hidden;   display: flex;   font-family: &#39;Anton&#39;, sans-serif;   justify-content: center;   align-items: center;   -webkit-perspe">
+<meta property="og:description" content="文章概述 对于IWIP协议的介绍，属于一个笔记的一个功能 主要的一个功能是方便自己的理解和查阅，所作的介绍或者解释都是自己在网络上或者自己遇到的一些情况的一个笔记！ 什么是IWIP?简介我们百度一下IWIP：百度给的解释如下wIP是Light Weight (轻型)IP协议，有无操作系统的支持都可以运行。LwIP实现的重点是在保持TCP协议主要功能的基础上减少对RAM 的占用，它只需十几KB的RA">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-20T17:43:17.783Z">
-<meta property="article:modified_time" content="2018-04-21T03:10:09.805Z">
+<meta property="article:published_time" content="2020-08-13T14:37:54.000Z">
+<meta property="article:modified_time" content="2020-08-13T17:51:18.802Z">
 <meta property="article:author" content="Mr Zhongzhiqiang">
+<meta property="article:tag" content="IWIP">
+<meta property="article:tag" content="TCP&#x2F;IP">
+<meta property="article:tag" content="socket">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="zzq_blog" type="application/atom+xml">
@@ -154,365 +157,91 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-TCP-IP笔记" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      IWIP TCP/IP笔记
+    </h1>
+  
+
+        
+        <a href="/2020/08/13/TCP-IP%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2020-08-13T14:37:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-13</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>CSS 404滚动框</title>
+        <h1 id="文章概述"><a href="#文章概述" class="headerlink" title="文章概述"></a>文章概述</h1><p> 对于IWIP协议的介绍，属于一个笔记的一个功能 主要的一个功能是方便自己的理解和查阅，所作的介绍或者解释都是自己在网络上或者自己遇到的一些情况的一个笔记！</p>
+<h1 id="什么是IWIP"><a href="#什么是IWIP" class="headerlink" title="什么是IWIP?"></a>什么是IWIP?</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><pre><code>我们百度一下IWIP：百度给的解释如下wIP是Light Weight (轻型)IP协议，有无操作系统的支持都可以运行。LwIP实现的重点是在保持TCP协议主要功能的基础上减少对RAM 的占用，它只需十几KB的RAM和40K左右的ROM就可以运行，这使LwIP协议栈适合在低端的嵌入式系统中使用。lwIP协议栈主要关注的是怎么样减少内存的使用和代码的大小，这样就可以让lwIP适用于资源有限的小型平台例如嵌入式系统。为了简化处理过程和内存要求，lwIP对API进行了裁减，可以不需要复制一些数据。</code></pre><h4 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h4><pre><code>适合嵌入式 需要的RAM/ROM都是比较小的，由于TCP/IP的特性 ，目前应用最广的是还是跑操作系统的，比如UCOS,FreeRTOS等系统，因为使用中需要用到信号量进行通信</code></pre><a id="more"></a>
+<h2 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h2><pre><code>lwip提供三种API：(1)：RAW API ，(2)：lwip API，(3)BSD API</code></pre><h2 id="Socket应用"><a href="#Socket应用" class="headerlink" title="Socket应用"></a>Socket应用</h2><pre><code>Socket:英文原意是“孔”或者“插座”的意思，在网络编程中，通常将其称之为：“套接字”，当前网络中的主流程序设计都是使用Socket 进行编程的，因为它简单易用，更是一个标准，能在不同平台很方便移植。</code></pre><h2 id="LWIP-中的socket"><a href="#LWIP-中的socket" class="headerlink" title="LWIP 中的socket"></a>LWIP 中的socket</h2><h3 id="服务端（Service）"><a href="#服务端（Service）" class="headerlink" title="服务端（Service）"></a>服务端（Service）</h3><h4 id="建立步骤"><a href="#建立步骤" class="headerlink" title="建立步骤"></a>建立步骤</h4><h2 id="1：创建一个Socket（套接字）’socket-’"><a href="#1：创建一个Socket（套接字）’socket-’" class="headerlink" title="1：创建一个Socket（套接字）’socket()’"></a>1：创建一个Socket（套接字）’socket()’</h2><h3 id="举例-：s-create-socket-AF-INET-1-0"><a href="#举例-：s-create-socket-AF-INET-1-0" class="headerlink" title="举例 ：s_create = socket(AF_INET, 1, 0);"></a>举例 ：s_create = socket(AF_INET, 1, 0);</h3><pre><code>&apos;Socket()&apos;其实是调用的&apos;int lwip_socket(int domain, int type, int protocol)&apos;</code></pre><h4 id="参数’domain’"><a href="#参数’domain’" class="headerlink" title="参数’domain’:"></a>参数’domain’:</h4><pre><code>表示该套接字使用的协议簇，对于&apos;TCP/IP 协议&apos;来说，该值始终为&apos;AF_INET&apos;.</code></pre><h3 id="参数’type’"><a href="#参数’type’" class="headerlink" title="参数’type’:"></a>参数’type’:</h3><p>   type： 指定了套接字使用的服务类型，可能的类型有3 种<br>        ‘1. SOCK_STREAM’：提供可靠的（即能保证数据正确传送到对方）面向连接的Socket 服务，多用于资料（如文件）传输，如TCP 协议。<br>        ‘2. SOCK_DGRAM’：是提供无保障的面向消息的Socket 服务，主要用于在网络上发广播信息，如UDP 协议，提供无连接不可靠的数据报交付服务。<br>        ‘3. SOCK_RAW’：表示原始套接字，它允许应用程序访问网络层的原始数据包，这个套接字用得比较少，暂时不用理会它。</p>
+<h3 id="参数’protocol’"><a href="#参数’protocol’" class="headerlink" title="参数’protocol’:"></a>参数’protocol’:</h3><pre><code>protocol：指定了套接字使用的协议，在&apos;IPv4&apos; 中，只有&apos;TCP协议提供SOCK_STREAM这种可靠的服务&apos;，只有&apos;UDP 协议供SOCK_DGRAM服务&apos;，对于这两种协议，&apos;protocol 的值均为0&apos;。当申请套接字成功的时候，该函数返回一个&apos;int 类型的值&apos;，也是Socket 描述符，用户通过这个值可以索引到一个Socket 连接结构——&apos;lwip_sock&apos;，当申请套接字&apos;失败&apos;时，&apos;该函数返回-1&apos;</code></pre><h2 id="2-bind-将IP地址等一些网络信息绑定到创建的套子上"><a href="#2-bind-将IP地址等一些网络信息绑定到创建的套子上" class="headerlink" title="2: bind() 将IP地址等一些网络信息绑定到创建的套子上"></a>2: bind() 将IP地址等一些网络信息绑定到创建的套子上</h2><h3 id="举例：socket-check-bind-s-create-struct-sockaddr-amp-address-sizeof-address"><a href="#举例：socket-check-bind-s-create-struct-sockaddr-amp-address-sizeof-address" class="headerlink" title="举例：socket_check = bind(s_create, (struct sockaddr *)&amp;address, sizeof(address));"></a>举例：socket_check = bind(s_create, (struct sockaddr *)&amp;address, sizeof(address));</h3><pre><code>&apos; bind() &apos;：实际调用的是下面的这个函数：
+&apos;&apos;&apos;
+int lwip_bind(int s, const struct sockaddr *name, socklen_t namelen)
+{
+struct lwip_sock *        sock;
+ip_addr_t                 local_addr;
+u16_t                     local_port;
+err_t                     err;
+const struct sockaddr_in *name_in;
 
-<style>
-body {
-  background: #000;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  font-family: 'Anton', sans-serif;
-  justify-content: center;
-  align-items: center;
-  -webkit-perspective: 1000px;
-          perspective: 1000px;
+sock = get_socket(s);
+if (!sock) {
+    return -1;
 }
+  /* check size, familiy and alignment of &apos;name&apos; */
+LWIP_ERROR(
+    &quot;lwip_bind: invalid address&quot;,
+    ((namelen == sizeof(struct sockaddr_in)) &amp;&amp; ((name-&gt;sa_family) == AF_INET) &amp;&amp; ((((mem_ptr_t)name) % 4) == 0)),
+    sock_set_errno(sock, err_to_errno(ERR_ARG));
+    return -1;);
+name_in = (const struct sockaddr_in *)(void *)name;
+......代码太多会影响阅读 有兴趣可以到这个函数中仔细观察
+&apos;&apos;&apos;</code></pre><h3 id="参数-s-："><a href="#参数-s-：" class="headerlink" title="参数 s ："></a>参数 s ：</h3><pre><code>参数s: 实际就是我们之前创建的socket（套接字）：&apos; s_create &apos;</code></pre><h3 id="参数-name-："><a href="#参数-name-：" class="headerlink" title="参数 *name ："></a>参数 *name ：</h3><pre><code>*name：是指向sockaddr结构体的一个指针，我们看一下这个结构体的类容如下：
+&apos;&apos;&apos;
+struct sockaddr {
+u8_t sa_len;     //长度
+u8_t sa_family;  //协议簇：比如上面使用的AF_INET(TCP/IP)
+char sa_data[14];  //连续的14个字节的信息 包括IP地址，端口信息等
+};
 
-div {
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-}
+其中&apos; char sa_data[14]; &apos;个人觉得是需要填写的数据格式和数量对我们不是很友好 所以可以看到上面的调用函数&apos; lwip_bind() &apos;中定义了一个结构体指针*name_in指向结构体：sockaddr_in
+&apos;&apos;&apos;
+struct sockaddr_in {
+u8_t           sin_len;
+u8_t           sin_family;
+u16_t          sin_port;
+struct in_addr sin_addr;
+char           sin_zero[8];
+};
+&apos;&apos;&apos;
+在这个结构体中 ，官方将刚才的14个字节帮分了一下类其中sin_port 字段是我们需要填写的端口号信息，sin_addr 字段是我们需要填写的IP 地址信息，剩下sin_zero区域的8 字节保留未用.
+完整一些的使用例程：
+&apos;&apos;&apos;
+#define PORT              5001
+#define IP_ADDR        &quot;192.168.0.181&quot;
 
-.rail {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  -webkit-transform: rotateX(-30deg) rotateY(-30deg);
-          transform: rotateX(-30deg) rotateY(-30deg);
-}
-.rail .stamp {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #141414;
-  color: #fff;
-  font-size: 7rem;
-}
-.rail .stamp:nth-child(1) {
-  -webkit-animation: stampSlide 40000ms -2300ms linear infinite;
-          animation: stampSlide 40000ms -2300ms linear infinite;
-}
-.rail .stamp:nth-child(2) {
-  -webkit-animation: stampSlide 40000ms -4300ms linear infinite;
-          animation: stampSlide 40000ms -4300ms linear infinite;
-}
-.rail .stamp:nth-child(3) {
-  -webkit-animation: stampSlide 40000ms -6300ms linear infinite;
-          animation: stampSlide 40000ms -6300ms linear infinite;
-}
-.rail .stamp:nth-child(4) {
-  -webkit-animation: stampSlide 40000ms -8300ms linear infinite;
-          animation: stampSlide 40000ms -8300ms linear infinite;
-}
-.rail .stamp:nth-child(5) {
-  -webkit-animation: stampSlide 40000ms -10300ms linear infinite;
-          animation: stampSlide 40000ms -10300ms linear infinite;
-}
-.rail .stamp:nth-child(6) {
-  -webkit-animation: stampSlide 40000ms -12300ms linear infinite;
-          animation: stampSlide 40000ms -12300ms linear infinite;
-}
-.rail .stamp:nth-child(7) {
-  -webkit-animation: stampSlide 40000ms -14300ms linear infinite;
-          animation: stampSlide 40000ms -14300ms linear infinite;
-}
-.rail .stamp:nth-child(8) {
-  -webkit-animation: stampSlide 40000ms -16300ms linear infinite;
-          animation: stampSlide 40000ms -16300ms linear infinite;
-}
-.rail .stamp:nth-child(9) {
-  -webkit-animation: stampSlide 40000ms -18300ms linear infinite;
-          animation: stampSlide 40000ms -18300ms linear infinite;
-}
-.rail .stamp:nth-child(10) {
-  -webkit-animation: stampSlide 40000ms -20300ms linear infinite;
-          animation: stampSlide 40000ms -20300ms linear infinite;
-}
-.rail .stamp:nth-child(11) {
-  -webkit-animation: stampSlide 40000ms -22300ms linear infinite;
-          animation: stampSlide 40000ms -22300ms linear infinite;
-}
-.rail .stamp:nth-child(12) {
-  -webkit-animation: stampSlide 40000ms -24300ms linear infinite;
-          animation: stampSlide 40000ms -24300ms linear infinite;
-}
-.rail .stamp:nth-child(13) {
-  -webkit-animation: stampSlide 40000ms -26300ms linear infinite;
-          animation: stampSlide 40000ms -26300ms linear infinite;
-}
-.rail .stamp:nth-child(14) {
-  -webkit-animation: stampSlide 40000ms -28300ms linear infinite;
-          animation: stampSlide 40000ms -28300ms linear infinite;
-}
-.rail .stamp:nth-child(15) {
-  -webkit-animation: stampSlide 40000ms -30300ms linear infinite;
-          animation: stampSlide 40000ms -30300ms linear infinite;
-}
-.rail .stamp:nth-child(16) {
-  -webkit-animation: stampSlide 40000ms -32300ms linear infinite;
-          animation: stampSlide 40000ms -32300ms linear infinite;
-}
-.rail .stamp:nth-child(17) {
-  -webkit-animation: stampSlide 40000ms -34300ms linear infinite;
-          animation: stampSlide 40000ms -34300ms linear infinite;
-}
-.rail .stamp:nth-child(18) {
-  -webkit-animation: stampSlide 40000ms -36300ms linear infinite;
-          animation: stampSlide 40000ms -36300ms linear infinite;
-}
-.rail .stamp:nth-child(19) {
-  -webkit-animation: stampSlide 40000ms -38300ms linear infinite;
-          animation: stampSlide 40000ms -38300ms linear infinite;
-}
-.rail .stamp:nth-child(20) {
-  -webkit-animation: stampSlide 40000ms -40300ms linear infinite;
-          animation: stampSlide 40000ms -40300ms linear infinite;
-}
+int sock = -1;  
+struct sockaddr_in server_addr;
+sock = socket(AF_INET, SOCK_STREAM, 0);
+server_addr.sin_family = AF_INET;      
+server_addr.sin_port = htons(PORT);   
+server_addr.sin_addr.s_addr = inet_addr(IP_ADDR);
+memset(&amp;(server_addr.sin_zero), 0, sizeof(server_addr.sin_zero));    
 
-@-webkit-keyframes stampSlide {
-  0% {
-    -webkit-transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(130px);
-            transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(130px);
-  }
-  100% {
-    -webkit-transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(-3870px);
-            transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(-3870px);
-  }
+if (bind(sock, (struct sockaddr *)&amp;server_addr, sizeof(struct sockaddr)) == -1) {
+;
 }
-
-@keyframes stampSlide {
-  0% {
-    -webkit-transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(130px);
-            transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(130px);
-  }
-  100% {
-    -webkit-transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(-3870px);
-            transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(-3870px);
-  }
-}
-.world {
-  -webkit-transform: rotateX(-30deg) rotateY(-30deg);
-          transform: rotateX(-30deg) rotateY(-30deg);
-}
-.world .forward {
-  position: absolute;
-  -webkit-animation: slide 2000ms linear infinite;
-          animation: slide 2000ms linear infinite;
-}
-.world .box {
-  width: 200px;
-  height: 200px;
-  -webkit-transform-origin: 100% 100%;
-          transform-origin: 100% 100%;
-  -webkit-animation: roll 2000ms cubic-bezier(1, 0.01, 1, 1) infinite;
-          animation: roll 2000ms cubic-bezier(1, 0.01, 1, 1) infinite;
-}
-.world .box .wall {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  background: rgba(10, 10, 10, 0.8);
-  border: 1px solid #fafafa;
-  box-sizing: border-box;
-}
-.world .box .wall::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: 7rem;
-}
-.world .box .wall:nth-child(1) {
-  -webkit-transform: translateZ(100px);
-          transform: translateZ(100px);
-}
-.world .box .wall:nth-child(2) {
-  -webkit-transform: rotateX(180deg) translateZ(100px);
-          transform: rotateX(180deg) translateZ(100px);
-}
-.world .box .wall:nth-child(3) {
-  -webkit-transform: rotateX(90deg) translateZ(100px);
-          transform: rotateX(90deg) translateZ(100px);
-}
-.world .box .wall:nth-child(3)::before {
-  -webkit-transform: rotateX(180deg) rotateZ(90deg) translateZ(-1px);
-          transform: rotateX(180deg) rotateZ(90deg) translateZ(-1px);
-  -webkit-animation: zeroFour 4000ms -2000ms linear infinite;
-          animation: zeroFour 4000ms -2000ms linear infinite;
-}
-.world .box .wall:nth-child(4) {
-  -webkit-transform: rotateX(-90deg) translateZ(100px);
-          transform: rotateX(-90deg) translateZ(100px);
-}
-.world .box .wall:nth-child(4)::before {
-  -webkit-transform: rotateX(180deg) rotateZ(-90deg) translateZ(-1px);
-          transform: rotateX(180deg) rotateZ(-90deg) translateZ(-1px);
-  -webkit-animation: zeroFour 4000ms -2000ms linear infinite;
-          animation: zeroFour 4000ms -2000ms linear infinite;
-}
-.world .box .wall:nth-child(5) {
-  -webkit-transform: rotateY(90deg) translateZ(100px);
-          transform: rotateY(90deg) translateZ(100px);
-}
-.world .box .wall:nth-child(5)::before {
-  -webkit-transform: rotateX(180deg) translateZ(-1px);
-          transform: rotateX(180deg) translateZ(-1px);
-  -webkit-animation: zeroFour 4000ms linear infinite;
-          animation: zeroFour 4000ms linear infinite;
-}
-.world .box .wall:nth-child(6) {
-  -webkit-transform: rotateY(-90deg) translateZ(100px);
-          transform: rotateY(-90deg) translateZ(100px);
-}
-.world .box .wall:nth-child(6)::before {
-  -webkit-transform: rotateX(180deg) rotateZ(180deg) translateZ(-1px);
-          transform: rotateX(180deg) rotateZ(180deg) translateZ(-1px);
-  -webkit-animation: zeroFour 4000ms linear infinite;
-          animation: zeroFour 4000ms linear infinite;
-}
-
-@-webkit-keyframes zeroFour {
-  0% {
-    content: '4';
-  }
-  100% {
-    content: '0';
-  }
-}
-
-@keyframes zeroFour {
-  0% {
-    content: '4';
-  }
-  100% {
-    content: '0';
-  }
-}
-@-webkit-keyframes roll {
-  0% {
-    -webkit-transform: rotateZ(0deg);
-            transform: rotateZ(0deg);
-  }
-  85% {
-    -webkit-transform: rotateZ(90deg);
-            transform: rotateZ(90deg);
-  }
-  87% {
-    -webkit-transform: rotateZ(88deg);
-            transform: rotateZ(88deg);
-  }
-  90% {
-    -webkit-transform: rotateZ(90deg);
-            transform: rotateZ(90deg);
-  }
-  100% {
-    -webkit-transform: rotateZ(90deg);
-            transform: rotateZ(90deg);
-  }
-}
-@keyframes roll {
-  0% {
-    -webkit-transform: rotateZ(0deg);
-            transform: rotateZ(0deg);
-  }
-  85% {
-    -webkit-transform: rotateZ(90deg);
-            transform: rotateZ(90deg);
-  }
-  87% {
-    -webkit-transform: rotateZ(88deg);
-            transform: rotateZ(88deg);
-  }
-  90% {
-    -webkit-transform: rotateZ(90deg);
-            transform: rotateZ(90deg);
-  }
-  100% {
-    -webkit-transform: rotateZ(90deg);
-            transform: rotateZ(90deg);
-  }
-}
-@-webkit-keyframes slide {
-  0% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-  }
-  100% {
-    -webkit-transform: translateX(-200px);
-            transform: translateX(-200px);
-  }
-}
-@keyframes slide {
-  0% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-  }
-  100% {
-    -webkit-transform: translateX(-200px);
-            transform: translateX(-200px);
-  }
-}
-</style>
-<meta name="generator" content="Hexo 4.2.1"></head>
-<body>
-
-<div class="rail">
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-</div>
-<div class="world">
-  <div class="forward">
-    <div class="box">
-      <div class="wall"></div>
-      <div class="wall"></div>
-      <div class="wall"></div>
-      <div class="wall"></div>
-      <div class="wall"></div>
-      <div class="wall"></div>
-    </div>
-  </div>
-</div>
-
-</body>
-</html>
+&apos;&apos;&apos;</code></pre><h3 id="参数-namelen："><a href="#参数-namelen：" class="headerlink" title="参数 namelen："></a>参数 namelen：</h3><pre><code>namelen：指定了之前name结构体的长度</code></pre><h2 id="3-listen（）：服务端使用-让服务端进入监听状态-等待连接端的连接-LwIP-中可以接收多个客户端的连接，因此参数backlog-指定了请求队列的大小"><a href="#3-listen（）：服务端使用-让服务端进入监听状态-等待连接端的连接-LwIP-中可以接收多个客户端的连接，因此参数backlog-指定了请求队列的大小" class="headerlink" title="3 listen（）：服务端使用, 让服务端进入监听状态 等待连接端的连接 LwIP 中可以接收多个客户端的连接，因此参数backlog 指定了请求队列的大小"></a>3 listen（）：服务端使用, 让服务端进入监听状态 等待连接端的连接 LwIP 中可以接收多个客户端的连接，因此参数backlog 指定了请求队列的大小</h2><h3 id="举例：listen-s-create-5"><a href="#举例：listen-s-create-5" class="headerlink" title="举例：listen(s_create, 5);"></a>举例：listen(s_create, 5);</h3><pre><code>对于&apos; listen() &apos; 调用的是：
+&apos; lwip_listen(int s, int backlog) &apos;函数</code></pre><h3 id="参数-s-创建的socket套字"><a href="#参数-s-创建的socket套字" class="headerlink" title="参数 s : 创建的socket套字"></a>参数 s : 创建的socket套字</h3><h3 id="参数-backlog"><a href="#参数-backlog" class="headerlink" title="参数 backlog:"></a>参数 backlog:</h3><pre><code>&apos; backlog &apos; 在函数原型中的使用是：
+&apos; limit the &quot;backlog&quot; parameter to fit in an u8_t &apos;
+官方给的注释是： &apos; limit the &quot;backlog&quot; parameter to fit in an u8_t &apos;//限制 backlog 以适合 u8 
+那么我们可以大概的计算一下 限制的请求队列最大个数是 &apos; 255 &apos;</code></pre><h2 id="4-accept-函数-服务端使用-：主要作用是等待着远端主机的连接请求，并且建立一个新的TCP-连接，在调用这个函数之前需要通过调用listen-函数让服务器进入监听状态，如果是跑操作系统-，在任务中调用这个函数-那么该任务就只能等待连接成功后才会往下执行-这个适合任务是处于一个阻塞状态的，失败返回-1"><a href="#4-accept-函数-服务端使用-：主要作用是等待着远端主机的连接请求，并且建立一个新的TCP-连接，在调用这个函数之前需要通过调用listen-函数让服务器进入监听状态，如果是跑操作系统-，在任务中调用这个函数-那么该任务就只能等待连接成功后才会往下执行-这个适合任务是处于一个阻塞状态的，失败返回-1" class="headerlink" title="4 accept()函数 服务端使用, ：主要作用是等待着远端主机的连接请求，并且建立一个新的TCP 连接，在调用这个函数之前需要通过调用listen()函数让服务器进入监听状态，如果是跑操作系统 ，在任务中调用这个函数 那么该任务就只能等待连接成功后才会往下执行 这个适合任务是处于一个阻塞状态的，失败返回 -1"></a>4 accept()函数 服务端使用, ：主要作用是等待着远端主机的连接请求，并且建立一个新的TCP 连接，在调用这个函数之前需要通过调用listen()函数让服务器进入监听状态，如果是跑操作系统 ，在任务中调用这个函数 那么该任务就只能等待连接成功后才会往下执行 这个适合任务是处于一个阻塞状态的，失败返回 -1</h2><h3 id="举例：int-new-socket-1-0-new-socket-1-accept-s-create-struct-sockaddr-amp-address-socklen-t-amp-addrlen"><a href="#举例：int-new-socket-1-0-new-socket-1-accept-s-create-struct-sockaddr-amp-address-socklen-t-amp-addrlen" class="headerlink" title="举例：int new_socket_1=0 ; new_socket_1 = accept(s_create, (struct sockaddr *)&amp;address, (socklen_t *)&amp;addrlen);"></a>举例：int new_socket_1=0 ; new_socket_1 = accept(s_create, (struct sockaddr *)&amp;address, (socklen_t *)&amp;addrlen);</h3><pre><code>accept()函数调用的是&apos; lwip_accept(int s, struct sockaddr *addr, socklen_t *addrlen) &apos;</code></pre><h3 id="举例：new-socket-1-accept-s-create-struct-sockaddr-amp-address-socklen-t-amp-addrlen"><a href="#举例：new-socket-1-accept-s-create-struct-sockaddr-amp-address-socklen-t-amp-addrlen" class="headerlink" title="举例：new_socket_1 = accept(s_create, (struct sockaddr *)&amp;address, (socklen_t *)&amp;addrlen);"></a>举例：new_socket_1 = accept(s_create, (struct sockaddr *)&amp;address, (socklen_t *)&amp;addrlen);</h3><p>  该函数如果连接成功后返回的值在参数 ‘ *addr ‘中，所以可以创建一个变量来得到这个值 </p>
 
       
 
@@ -542,6 +271,25 @@ div {
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">IWIP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">TCP/IP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">socket</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -592,7 +340,7 @@ div {
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/404.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/13/TCP-IP%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -604,6 +352,16 @@ div {
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/16/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E6%B5%8B%E8%AF%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">博客文章测试</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -654,7 +412,7 @@ div {
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
