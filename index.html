@@ -152,6 +152,116 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-C语言fopen（）函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/19/C%E8%AF%AD%E8%A8%80fopen%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0/">C语言fopen（）函数</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/19/C%E8%AF%AD%E8%A8%80fopen%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0/" class="archive-article-date">
+  	<time datetime="2020-08-18T16:11:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="C语言fopen（）函数"><a href="#C语言fopen（）函数" class="headerlink" title="C语言fopen（）函数"></a>C语言fopen（）函数</h1><h4 id="C语言文件打开函数-函数声明在头文件-stdio-h中"><a href="#C语言文件打开函数-函数声明在头文件-stdio-h中" class="headerlink" title="C语言文件打开函数,函数声明在头文件 stdio.h中"></a>C语言文件打开函数,函数声明在头文件 stdio.h中</h4><h3 id="函数定义："><a href="#函数定义：" class="headerlink" title="函数定义："></a>函数定义：</h3><pre><code><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">_ACRTIMP FILE* __cdecl <span class="title">fopen</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">_In_z_ <span class="keyword">char</span> <span class="keyword">const</span>* _FileName,</span></span></span><br><span class="line"><span class="function"><span class="params">_In_z_ <span class="keyword">char</span> <span class="keyword">const</span>* _Mode</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure></code></pre><h3 id="参数-fileName：指向需要打开文件的文件指针"><a href="#参数-fileName：指向需要打开文件的文件指针" class="headerlink" title="参数  _fileName：指向需要打开文件的文件指针"></a>参数  _fileName：指向需要打开文件的文件指针</h3><pre><code>第一个参数可以理解成待打开文件的名称，更确切的说是包含文件名的字符串地址。</code></pre><h3 id="参数-Mode-打开文件的模式"><a href="#参数-Mode-打开文件的模式" class="headerlink" title="参数 _Mode: 打开文件的模式"></a>参数 _Mode: 打开文件的模式</h3><pre><code>C提供的模式包括以下：
+文本模式：
+&quot;s&quot;:以读的方式打开文件
+&quot;w&quot;:以写的方式打开文件，把现有的文件长度截为0，如果文件不存在则创建一个文件，这个文件创建的位置应该是工程的文件夹下
+&quot;a&quot;:以写的方式打开文件，在现有文件后面添加内容，如文件不存在则会创建一个新的文件。
+&quot;r+&quot;:以更新模式打开文件（即可以读写文件）
+&quot;w+&quot;:以更新模式打开文件（可以读写），如果文件存在，则将文件长度截为0，如果文件不存在则创建一个新文件
+&quot;a+&quot;:以更新模式打开文件（可以读写），在现有文件的末尾添加内容，如果文件不存在，则创建一个新文件；可以读整个文件，但是只能从末尾添加内容。
+二进制模式：
+&quot;rb&quot;,&quot;wb&quot;,&quot;ab&quot;,&quot;rb+&quot;,&quot;r+b&quot;,&quot;wb+&quot;,&quot;w+b&quot;,&quot;ab+&quot;,&quot;a+b&quot;:与上一个模式类似类似，但是是以二进制模式打开文件而不是文本模式打开文件
+C11新增特性：
+&quot;wx&quot;,&quot;wbx&quot;,&quot;w+x&quot;,&quot;wb+x&quot;或&quot;w+bx&quot;:新的C11新增了带x字母的写模式，与之前的写模式相比具有更多的特性。第一，如果以传统的一种写模式打开现有的一个文件，fopen()会把该文件长度截为0，这样就失去了该文件的内容。使用带x字母的写模式，即使fopen()操作失败，源文件的内容也不会被删除。第二，如果环境允许，x模式的独占性使得其他程序或现成无法访问正在被打开的文件。
+
+//明天再继续：</code></pre><!---
+    记得贴代码和图片，书本的第416页，CMA下运行EXE程序先找到工程的目录，VS的EXE工程再Debug文件夹下面 文件也是在里面 只有一个fopen例程 ，可以在继续多写几个加深印象
+-->
+<!---    
+<figure class="highlight plain"><figcaption><span>[] [title] [url] [link text]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code snippet</span><br></pre></td></tr></table></figure>
+<p>上面是百度的一种代码高亮的一种写法<br>—&gt; </p>
+<!---
+<pre><code>  
+        _ACRTIMP FILE* __cdecl fopen(
+        _In_z_ char const* _FileName,
+        _In_z_ char const* _Mode
+        );
+ </code></pre>
+ --->
+<!---
+注释用法
+-->
+<!---
+    ``` 使用键盘fn+Esc按键可以敲出来
+-->
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">fopen()</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/19/C%E8%AF%AD%E8%A8%80fopen%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-photo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -576,6 +686,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">fopen()</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
             
             <div class="clearfix"></div>
