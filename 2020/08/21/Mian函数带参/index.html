@@ -6,19 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>zzq_blog</title>
+  <title>Mian函数带参 | zzq_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CSS 404滚动框   body {   background: #000;   height: 100vh;   overflow: hidden;   display: flex;   font-family: &#39;Anton&#39;, sans-serif;   justify-content: center;   align-items: center;   -webkit-perspe">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zzq_blog">
-<meta property="og:url" content="http://yoursite.com/404.html">
+  <meta name="description" content="Main()函数参数参数 argc  argvmain()函数C规定可以携带两个参数，常见的是argc,argv，C规定第一个参数必须是int型参，第二个参数argv必须是指向字符串的指针数组，所以常见的格式就如下定义 1int main(int argc,char *argv[])">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mian函数带参">
+<meta property="og:url" content="http://yoursite.com/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/index.html">
 <meta property="og:site_name" content="zzq_blog">
-<meta property="og:description" content="CSS 404滚动框   body {   background: #000;   height: 100vh;   overflow: hidden;   display: flex;   font-family: &#39;Anton&#39;, sans-serif;   justify-content: center;   align-items: center;   -webkit-perspe">
+<meta property="og:description" content="Main()函数参数参数 argc  argvmain()函数C规定可以携带两个参数，常见的是argc,argv，C规定第一个参数必须是int型参，第二个参数argv必须是指向字符串的指针数组，所以常见的格式就如下定义 1int main(int argc,char *argv[])">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-20T17:43:17.783Z">
-<meta property="article:modified_time" content="2018-04-21T03:10:09.805Z">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/main.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/5.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/worr.jpg">
+<meta property="article:published_time" content="2020-08-20T17:16:29.000Z">
+<meta property="article:modified_time" content="2020-08-20T17:43:21.326Z">
 <meta property="article:author" content="Mr Zhongzhiqiang">
+<meta property="article:tag" content="C语言">
+<meta property="article:tag" content="main函数参数">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/main.jpg">
   
     <link rel="alternative" href="/atom.xml" title="zzq_blog" type="application/atom+xml">
   
@@ -154,365 +160,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            
+<article id="post-Mian函数带参" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Mian函数带参
+    </h1>
+  
+
+        
+        <a href="/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/" class="archive-article-date">
+  	<time datetime="2020-08-20T17:16:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-21</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>CSS 404滚动框</title>
-
-<style>
-body {
-  background: #000;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  font-family: 'Anton', sans-serif;
-  justify-content: center;
-  align-items: center;
-  -webkit-perspective: 1000px;
-          perspective: 1000px;
-}
-
-div {
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-}
-
-.rail {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  -webkit-transform: rotateX(-30deg) rotateY(-30deg);
-          transform: rotateX(-30deg) rotateY(-30deg);
-}
-.rail .stamp {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #141414;
-  color: #fff;
-  font-size: 7rem;
-}
-.rail .stamp:nth-child(1) {
-  -webkit-animation: stampSlide 40000ms -2300ms linear infinite;
-          animation: stampSlide 40000ms -2300ms linear infinite;
-}
-.rail .stamp:nth-child(2) {
-  -webkit-animation: stampSlide 40000ms -4300ms linear infinite;
-          animation: stampSlide 40000ms -4300ms linear infinite;
-}
-.rail .stamp:nth-child(3) {
-  -webkit-animation: stampSlide 40000ms -6300ms linear infinite;
-          animation: stampSlide 40000ms -6300ms linear infinite;
-}
-.rail .stamp:nth-child(4) {
-  -webkit-animation: stampSlide 40000ms -8300ms linear infinite;
-          animation: stampSlide 40000ms -8300ms linear infinite;
-}
-.rail .stamp:nth-child(5) {
-  -webkit-animation: stampSlide 40000ms -10300ms linear infinite;
-          animation: stampSlide 40000ms -10300ms linear infinite;
-}
-.rail .stamp:nth-child(6) {
-  -webkit-animation: stampSlide 40000ms -12300ms linear infinite;
-          animation: stampSlide 40000ms -12300ms linear infinite;
-}
-.rail .stamp:nth-child(7) {
-  -webkit-animation: stampSlide 40000ms -14300ms linear infinite;
-          animation: stampSlide 40000ms -14300ms linear infinite;
-}
-.rail .stamp:nth-child(8) {
-  -webkit-animation: stampSlide 40000ms -16300ms linear infinite;
-          animation: stampSlide 40000ms -16300ms linear infinite;
-}
-.rail .stamp:nth-child(9) {
-  -webkit-animation: stampSlide 40000ms -18300ms linear infinite;
-          animation: stampSlide 40000ms -18300ms linear infinite;
-}
-.rail .stamp:nth-child(10) {
-  -webkit-animation: stampSlide 40000ms -20300ms linear infinite;
-          animation: stampSlide 40000ms -20300ms linear infinite;
-}
-.rail .stamp:nth-child(11) {
-  -webkit-animation: stampSlide 40000ms -22300ms linear infinite;
-          animation: stampSlide 40000ms -22300ms linear infinite;
-}
-.rail .stamp:nth-child(12) {
-  -webkit-animation: stampSlide 40000ms -24300ms linear infinite;
-          animation: stampSlide 40000ms -24300ms linear infinite;
-}
-.rail .stamp:nth-child(13) {
-  -webkit-animation: stampSlide 40000ms -26300ms linear infinite;
-          animation: stampSlide 40000ms -26300ms linear infinite;
-}
-.rail .stamp:nth-child(14) {
-  -webkit-animation: stampSlide 40000ms -28300ms linear infinite;
-          animation: stampSlide 40000ms -28300ms linear infinite;
-}
-.rail .stamp:nth-child(15) {
-  -webkit-animation: stampSlide 40000ms -30300ms linear infinite;
-          animation: stampSlide 40000ms -30300ms linear infinite;
-}
-.rail .stamp:nth-child(16) {
-  -webkit-animation: stampSlide 40000ms -32300ms linear infinite;
-          animation: stampSlide 40000ms -32300ms linear infinite;
-}
-.rail .stamp:nth-child(17) {
-  -webkit-animation: stampSlide 40000ms -34300ms linear infinite;
-          animation: stampSlide 40000ms -34300ms linear infinite;
-}
-.rail .stamp:nth-child(18) {
-  -webkit-animation: stampSlide 40000ms -36300ms linear infinite;
-          animation: stampSlide 40000ms -36300ms linear infinite;
-}
-.rail .stamp:nth-child(19) {
-  -webkit-animation: stampSlide 40000ms -38300ms linear infinite;
-          animation: stampSlide 40000ms -38300ms linear infinite;
-}
-.rail .stamp:nth-child(20) {
-  -webkit-animation: stampSlide 40000ms -40300ms linear infinite;
-          animation: stampSlide 40000ms -40300ms linear infinite;
-}
-
-@-webkit-keyframes stampSlide {
-  0% {
-    -webkit-transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(130px);
-            transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(130px);
-  }
-  100% {
-    -webkit-transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(-3870px);
-            transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(-3870px);
-  }
-}
-
-@keyframes stampSlide {
-  0% {
-    -webkit-transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(130px);
-            transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(130px);
-  }
-  100% {
-    -webkit-transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(-3870px);
-            transform: rotateX(90deg) rotateZ(-90deg) translateZ(-200px) translateY(-3870px);
-  }
-}
-.world {
-  -webkit-transform: rotateX(-30deg) rotateY(-30deg);
-          transform: rotateX(-30deg) rotateY(-30deg);
-}
-.world .forward {
-  position: absolute;
-  -webkit-animation: slide 2000ms linear infinite;
-          animation: slide 2000ms linear infinite;
-}
-.world .box {
-  width: 200px;
-  height: 200px;
-  -webkit-transform-origin: 100% 100%;
-          transform-origin: 100% 100%;
-  -webkit-animation: roll 2000ms cubic-bezier(1, 0.01, 1, 1) infinite;
-          animation: roll 2000ms cubic-bezier(1, 0.01, 1, 1) infinite;
-}
-.world .box .wall {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  background: rgba(10, 10, 10, 0.8);
-  border: 1px solid #fafafa;
-  box-sizing: border-box;
-}
-.world .box .wall::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: 7rem;
-}
-.world .box .wall:nth-child(1) {
-  -webkit-transform: translateZ(100px);
-          transform: translateZ(100px);
-}
-.world .box .wall:nth-child(2) {
-  -webkit-transform: rotateX(180deg) translateZ(100px);
-          transform: rotateX(180deg) translateZ(100px);
-}
-.world .box .wall:nth-child(3) {
-  -webkit-transform: rotateX(90deg) translateZ(100px);
-          transform: rotateX(90deg) translateZ(100px);
-}
-.world .box .wall:nth-child(3)::before {
-  -webkit-transform: rotateX(180deg) rotateZ(90deg) translateZ(-1px);
-          transform: rotateX(180deg) rotateZ(90deg) translateZ(-1px);
-  -webkit-animation: zeroFour 4000ms -2000ms linear infinite;
-          animation: zeroFour 4000ms -2000ms linear infinite;
-}
-.world .box .wall:nth-child(4) {
-  -webkit-transform: rotateX(-90deg) translateZ(100px);
-          transform: rotateX(-90deg) translateZ(100px);
-}
-.world .box .wall:nth-child(4)::before {
-  -webkit-transform: rotateX(180deg) rotateZ(-90deg) translateZ(-1px);
-          transform: rotateX(180deg) rotateZ(-90deg) translateZ(-1px);
-  -webkit-animation: zeroFour 4000ms -2000ms linear infinite;
-          animation: zeroFour 4000ms -2000ms linear infinite;
-}
-.world .box .wall:nth-child(5) {
-  -webkit-transform: rotateY(90deg) translateZ(100px);
-          transform: rotateY(90deg) translateZ(100px);
-}
-.world .box .wall:nth-child(5)::before {
-  -webkit-transform: rotateX(180deg) translateZ(-1px);
-          transform: rotateX(180deg) translateZ(-1px);
-  -webkit-animation: zeroFour 4000ms linear infinite;
-          animation: zeroFour 4000ms linear infinite;
-}
-.world .box .wall:nth-child(6) {
-  -webkit-transform: rotateY(-90deg) translateZ(100px);
-          transform: rotateY(-90deg) translateZ(100px);
-}
-.world .box .wall:nth-child(6)::before {
-  -webkit-transform: rotateX(180deg) rotateZ(180deg) translateZ(-1px);
-          transform: rotateX(180deg) rotateZ(180deg) translateZ(-1px);
-  -webkit-animation: zeroFour 4000ms linear infinite;
-          animation: zeroFour 4000ms linear infinite;
-}
-
-@-webkit-keyframes zeroFour {
-  0% {
-    content: '4';
-  }
-  100% {
-    content: '0';
-  }
-}
-
-@keyframes zeroFour {
-  0% {
-    content: '4';
-  }
-  100% {
-    content: '0';
-  }
-}
-@-webkit-keyframes roll {
-  0% {
-    -webkit-transform: rotateZ(0deg);
-            transform: rotateZ(0deg);
-  }
-  85% {
-    -webkit-transform: rotateZ(90deg);
-            transform: rotateZ(90deg);
-  }
-  87% {
-    -webkit-transform: rotateZ(88deg);
-            transform: rotateZ(88deg);
-  }
-  90% {
-    -webkit-transform: rotateZ(90deg);
-            transform: rotateZ(90deg);
-  }
-  100% {
-    -webkit-transform: rotateZ(90deg);
-            transform: rotateZ(90deg);
-  }
-}
-@keyframes roll {
-  0% {
-    -webkit-transform: rotateZ(0deg);
-            transform: rotateZ(0deg);
-  }
-  85% {
-    -webkit-transform: rotateZ(90deg);
-            transform: rotateZ(90deg);
-  }
-  87% {
-    -webkit-transform: rotateZ(88deg);
-            transform: rotateZ(88deg);
-  }
-  90% {
-    -webkit-transform: rotateZ(90deg);
-            transform: rotateZ(90deg);
-  }
-  100% {
-    -webkit-transform: rotateZ(90deg);
-            transform: rotateZ(90deg);
-  }
-}
-@-webkit-keyframes slide {
-  0% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-  }
-  100% {
-    -webkit-transform: translateX(-200px);
-            transform: translateX(-200px);
-  }
-}
-@keyframes slide {
-  0% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-  }
-  100% {
-    -webkit-transform: translateX(-200px);
-            transform: translateX(-200px);
-  }
-}
-</style>
-<meta name="generator" content="Hexo 4.2.1"></head>
-<body>
-
-<div class="rail">
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-  <div class="stamp four">4</div>
-  <div class="stamp zero">0</div>
-</div>
-<div class="world">
-  <div class="forward">
-    <div class="box">
-      <div class="wall"></div>
-      <div class="wall"></div>
-      <div class="wall"></div>
-      <div class="wall"></div>
-      <div class="wall"></div>
-      <div class="wall"></div>
-    </div>
-  </div>
-</div>
-
-</body>
-</html>
+        <h1 id="Main-函数参数"><a href="#Main-函数参数" class="headerlink" title="Main()函数参数"></a>Main()函数参数</h1><h3 id="参数-argc-argv"><a href="#参数-argc-argv" class="headerlink" title="参数 argc  argv"></a>参数 argc  argv</h3><pre><code>main()函数C规定可以携带两个参数，常见的是argc,argv，C规定第一个参数必须是int型参，第二个参数argv必须是指向字符串的指针数组，所以常见的格式就如下定义
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> *argv[])</span></span></span><br></pre></td></tr></table></figure></code></pre><a id="more"></a>
+<h3 id="参数含义"><a href="#参数含义" class="headerlink" title="参数含义"></a>参数含义</h3><pre><code>int argc: 表示传入的参数个数，即使不传递任何参数，argc实际是值最小是1
+char argv[]: 存取传入的字符串值，其中 argv[0]=&quot;程序工程名&quot;，这也解释了为什么argc最小值是1，</code></pre><h3 id="main-带参函数传值"><a href="#main-带参函数传值" class="headerlink" title="main()带参函数传值"></a>main()带参函数传值</h3><pre><code>因为main是程序执行的入口，所以是没有其他函数能调用main()函数，所以一般的方法是没法传递参数的，只能通过命令行来传递参数win平台（CMD）</code></pre><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><pre><code>进入命令管理，进入工程文件路径(包含)&quot;工程名&quot;.exe的文件夹路径中，开始传参数：首先第一个值可以理解是第一个参数，工程名：，后面的参数自己可以根据实际情况传递</code></pre><h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><h4 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h4><pre><code><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">   <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> *argv[])</span> <span class="comment">//main参数 argc:表示命令参数个数 ，argv[]存放参数的指针</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;argc;i++) </span><br><span class="line">    &#123;</span><br><span class="line">	    <span class="built_in">printf</span>(<span class="string">"argc的值：%d,argv的值是%s"</span>, argc, argv[i]);<span class="comment">//循环打印输入的参数</span></span><br><span class="line">	    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></code></pre><h4 id="在命令管理中传递参数"><a href="#在命令管理中传递参数" class="headerlink" title="在命令管理中传递参数"></a>在命令管理中传递参数</h4><h4 id="示例中一共写入了5个参数"><a href="#示例中一共写入了5个参数" class="headerlink" title="示例中一共写入了5个参数"></a>示例中一共写入了5个参数</h4><pre><code>参数1（工程名）：“Main_参数.exe”
+参数2：“参数1”
+参数3：“参数2”
+参数4：“参数3”
+参数4：“参数4”</code></pre><p><img src="/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/main.jpg" alt="main"><br><img src="/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/5.jpg" alt="5"></p>
+<h4 id="错误使用"><a href="#错误使用" class="headerlink" title="错误使用"></a>错误使用</h4><p><img src="/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/worr.jpg" alt="worr"></p>
 
       
 
@@ -542,6 +219,21 @@ div {
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">main函数参数</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -592,7 +284,7 @@ div {
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/404.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -604,6 +296,16 @@ div {
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2020/08/19/C%E8%AF%AD%E8%A8%80fopen%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C语言fopen（）函数</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -654,7 +356,7 @@ div {
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
