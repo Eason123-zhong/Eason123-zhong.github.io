@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | zzq_blog</title>
+  <title>大小端 | zzq_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zzq_blog">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="数据格式的大小端模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大小端">
+<meta property="og:url" content="http://yoursite.com/2020/08/26/%E5%A4%A7%E5%B0%8F%E7%AB%AF/index.html">
 <meta property="og:site_name" content="zzq_blog">
+<meta property="og:description" content="数据格式的大小端模式">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/08/26/%E5%A4%A7%E5%B0%8F%E7%AB%AF/big_endian.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/08/26/%E5%A4%A7%E5%B0%8F%E7%AB%AF/little_endian.jpg">
+<meta property="article:published_time" content="2020-08-26T15:59:19.000Z">
+<meta property="article:modified_time" content="2020-08-26T16:50:05.056Z">
 <meta property="article:author" content="Mr Zhongzhiqiang">
+<meta property="article:tag" content="-C语言 -大小端">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/08/26/%E5%A4%A7%E5%B0%8F%E7%AB%AF/big_endian.jpg">
   
     <link rel="alternative" href="/atom.xml" title="zzq_blog" type="application/atom+xml">
   
@@ -151,35 +159,61 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-大小端" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/26/%E5%A4%A7%E5%B0%8F%E7%AB%AF/" class="archive-article-date">
-  	<time datetime="2020-08-26T15:59:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-26</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/26/%E5%A4%A7%E5%B0%8F%E7%AB%AF/">大小端</a>
+    <h1 class="article-title" itemprop="name">
+      大小端
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/08/26/%E5%A4%A7%E5%B0%8F%E7%AB%AF/" class="archive-article-date">
+  	<time datetime="2020-08-26T15:59:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="数据格式的大小端模式"><a href="#数据格式的大小端模式" class="headerlink" title="数据格式的大小端模式"></a>数据格式的大小端模式</h1><a id="more"></a>
+
+<h4 id="数据在内存中的存储方式"><a href="#数据在内存中的存储方式" class="headerlink" title="数据在内存中的存储方式"></a>数据在内存中的存储方式</h4><h2 id="大端模式"><a href="#大端模式" class="headerlink" title="大端模式"></a>大端模式</h2><h4 id="Big-Endian-低地址存放高位（高字节）"><a href="#Big-Endian-低地址存放高位（高字节）" class="headerlink" title="Big-Endian: 低地址存放高位（高字节）"></a>Big-Endian: 低地址存放高位（高字节）</h4><pre><code>数据的高字节保存在内存的低地址中，相对数据的低字节保存在高地址中。数据高低字节从`右向左`为 ：`高----低`
+举例子：在`大端模式`下按照`地址顺序`存以下数据：0xaabbccdd,该组数据中高位顺序因为是十六进制的数据也可以称为高字节顺序为：0xaa,0xbb,0xcc,0xdd。`大端模式`也就是将高字节的数据存放在低地址中，当我们从一段内存中`按顺序`读取数据时，按照`大端模式`我们就需要先从`低地址`开始读出数据：0xaa,0xbb,0xcc,0xdd这几个数据。</code></pre><p><img src="/2020/08/26/%E5%A4%A7%E5%B0%8F%E7%AB%AF/big_endian.jpg" alt="big_endian"> </p>
+<h2 id="小端模式"><a href="#小端模式" class="headerlink" title="小端模式"></a>小端模式</h2><h4 id="BigLittle-Endian-低地址存放低位（低字节）"><a href="#BigLittle-Endian-低地址存放低位（低字节）" class="headerlink" title="BigLittle-Endian: 低地址存放低位（低字节）"></a>BigLittle-Endian: 低地址存放低位（低字节）</h4><pre><code>数据的高字节保存在内存的低地址中，相对数据的低字节保存在高地址中。数据高低字节从`右向左`为 ：`高----低`
+举例子：在`小端模式`下按照 `地址顺序`存以下数据:0xaabbccdd,该组数据中高位顺序因为是十六进制的数据也可以称为高字节顺序为：0xaa,0xbb,0xcc,0xdd。`大端模式`也就是将高字节的数据存放在低地址中，当我们从一段内存中`按顺序`读取数据时，按照小端模式我们就需要先从`高地址`开始读出数据：0xaa,0xbb,0xcc,0xdd这几个数据。</code></pre><p><img src="/2020/08/26/%E5%A4%A7%E5%B0%8F%E7%AB%AF/little_endian.jpg" alt="little_endian"></p>
+<h4 id="大小端的作用"><a href="#大小端的作用" class="headerlink" title="大小端的作用"></a>大小端的作用</h4><pre><code>程序在不同平台下移植可能会因为不同的数据存取顺序导致出现问题，比如常见的大端平台：51系列的单片机一般都是使用的大端模式，其他常见的单片机一般使用小端模式，如果这两者之间移植程序需要注意数据大小端这点！</code></pre>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -191,252 +225,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/26/%E5%A4%A7%E5%B0%8F%E7%AB%AF/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/" class="archive-article-date">
-  	<time datetime="2020-08-20T17:16:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-21</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mian函数带参</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/">Mian函数带参</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">main函数参数</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/19/C%E8%AF%AD%E8%A8%80fopen%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2020-08-18T16:11:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/19/C%E8%AF%AD%E8%A8%80fopen%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0/">C语言fopen（）函数</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">fopen()</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/15/photo/" class="archive-article-date">
-  	<time datetime="2020-08-14T17:01:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/15/photo/">photo</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/13/TCP-IP%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2020-08-13T14:37:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/13/TCP-IP%E7%AC%94%E8%AE%B0/">IWIP TCP/IP笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">IWIP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">TCP/IP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">socket</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/16/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E6%B5%8B%E8%AF%95/" class="archive-article-date">
-  	<time datetime="2020-07-15T18:02:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/16/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E6%B5%8B%E8%AF%95/">博客文章测试</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/16/hello-world/" class="archive-article-date">
-  	<time datetime="2020-07-15T17:53:48.006Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/16/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -459,8 +347,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
