@@ -6,15 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/8 | zzq_blog</title>
+  <title>FreeRTOS记录 | zzq_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zzq_blog">
-<meta property="og:url" content="http://yoursite.com/archives/2020/08/index.html">
+  <meta name="description" content="移植FrreRTOS到STM32cubeide平台，使用标准库移植问题记录FreeRTOS源码中的port.c文件汇编报错!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FreeRTOS记录">
+<meta property="og:url" content="http://yoursite.com/2020/09/13/FreeRTOS%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="zzq_blog">
+<meta property="og:description" content="移植FrreRTOS到STM32cubeide平台，使用标准库移植问题记录FreeRTOS源码中的port.c文件汇编报错!">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/09/13/FreeRTOS%E8%AE%B0%E5%BD%95/ERROR.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/13/FreeRTOS%E8%AE%B0%E5%BD%95/GCC.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/13/FreeRTOS%E8%AE%B0%E5%BD%95/RVDS.jpg">
+<meta property="article:published_time" content="2020-09-12T16:14:07.000Z">
+<meta property="article:modified_time" content="2020-09-12T16:54:09.991Z">
 <meta property="article:author" content="Mr Zhongzhiqiang">
+<meta property="article:tag" content="FreeRTOS">
+<meta property="article:tag" content="STM32CUBEIDE">
+<meta property="article:tag" content="STM32标准库">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/09/13/FreeRTOS%E8%AE%B0%E5%BD%95/ERROR.jpg">
   
     <link rel="alternative" href="/atom.xml" title="zzq_blog" type="application/atom+xml">
   
@@ -151,227 +162,178 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-FreeRTOS记录" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      FreeRTOS记录
+    </h1>
+  
+
+        
+        <a href="/2020/09/13/FreeRTOS%E8%AE%B0%E5%BD%95/" class="archive-article-date">
+  	<time datetime="2020-09-12T16:14:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-13</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="移植FrreRTOS到STM32cubeide平台，使用标准库移植问题记录"><a href="#移植FrreRTOS到STM32cubeide平台，使用标准库移植问题记录" class="headerlink" title="移植FrreRTOS到STM32cubeide平台，使用标准库移植问题记录"></a>移植FrreRTOS到STM32cubeide平台，使用标准库移植问题记录</h1><h3 id="FreeRTOS源码中的port-c文件汇编报错"><a href="#FreeRTOS源码中的port-c文件汇编报错" class="headerlink" title="FreeRTOS源码中的port.c文件汇编报错!"></a>FreeRTOS源码中的<code>port.c</code>文件汇编报错!</h3><a id="more"></a>
+<h4 id="问题原因：GCC汇编格式不同导致的"><a href="#问题原因：GCC汇编格式不同导致的" class="headerlink" title="问题原因：GCC汇编格式不同导致的"></a>问题原因：GCC汇编格式不同导致的</h4><h4 id="简单介绍："><a href="#简单介绍：" class="headerlink" title="简单介绍："></a>简单介绍：</h4><pre><code>ST官方提供的新编译器STM32CUBEIDE默认使用的是官方新推出来的HAL库，如果是创建新工程那起始影响不是很大，无非只是对新库的一个重新熟悉过程，但是如果是对旧工程的一些维护的话，之前使用标准库一直到HAL库移植过程中可能还会导致很多其他BUG，所以继续使用标准库是一个很好的解决方式。
+但是移植过程中会有一些其他问题，主要在于平台使用的C编译器不同的原因，STM32CUBEIDE使用的是GCC来编译C，但是KEil MDK使用是交叉的编译器，具体编译器有兴趣可以查一下，但是不是GCC起始KEIL是支持GCC编译器的。GCC与其他编译器的汇编格式是不同的！</code></pre><h4 id="问题如下："><a href="#问题如下：" class="headerlink" title="问题如下："></a>问题如下：</h4><p><img src="/2020/09/13/FreeRTOS%E8%AE%B0%E5%BD%95/ERROR.jpg" alt="ERROR"></p>
+<h4 id="解决方式：移植FreeRTOS提供的GCC版本的库文件即可"><a href="#解决方式：移植FreeRTOS提供的GCC版本的库文件即可" class="headerlink" title="解决方式：移植FreeRTOS提供的GCC版本的库文件即可"></a>解决方式：移植FreeRTOS提供的GCC版本的库文件即可</h4><h5 id="修改Source-portable-GCC-选择对应硬件平台的文件"><a href="#修改Source-portable-GCC-选择对应硬件平台的文件" class="headerlink" title="修改Source/portable/GCC/(选择对应硬件平台的文件)"></a>修改<code>Source/portable/GCC/(选择对应硬件平台的文件)</code></h5><pre><code>Keil移植FreeRTOS直接使用的是文件路径为`Source/portable/RVDS/CM3`更改为`Source/portable/GCC/CM3`即可 ，其他文件都不变！</code></pre><h4 id="更改后portable文件夹类容对比"><a href="#更改后portable文件夹类容对比" class="headerlink" title="更改后portable文件夹类容对比"></a>更改后<code>portable</code>文件夹类容对比</h4><h5 id="移植过程中一定要保证FreeRTOS的版本相同"><a href="#移植过程中一定要保证FreeRTOS的版本相同" class="headerlink" title="移植过程中一定要保证FreeRTOS的版本相同"></a>移植过程中一定要保证FreeRTOS的版本相同</h5><p><img src="/2020/09/13/FreeRTOS%E8%AE%B0%E5%BD%95/GCC.jpg" alt="GCC"><br><img src="/2020/09/13/FreeRTOS%E8%AE%B0%E5%BD%95/RVDS.jpg" alt="RVDS"></p>
+<h4 id="其他文件依然可以正常使用包括之前配置好的FrreRTOSConfig-h等文件直接移植就可以，记得在STM32CUBEIDE中将文件头文件包含进去即可！"><a href="#其他文件依然可以正常使用包括之前配置好的FrreRTOSConfig-h等文件直接移植就可以，记得在STM32CUBEIDE中将文件头文件包含进去即可！" class="headerlink" title="其他文件依然可以正常使用包括之前配置好的FrreRTOSConfig.h等文件直接移植就可以，记得在STM32CUBEIDE中将文件头文件包含进去即可！"></a>其他文件依然可以正常使用包括之前配置好的FrreRTOSConfig.h等文件直接移植就可以，记得在STM32CUBEIDE中将文件头文件包含进去即可！</h4>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/26/%E5%A4%A7%E5%B0%8F%E7%AB%AF/" class="archive-article-date">
-  	<time datetime="2020-08-26T15:59:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/26/%E5%A4%A7%E5%B0%8F%E7%AB%AF/">大小端</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">-C语言 -大小端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/" class="archive-article-date">
-  	<time datetime="2020-08-20T17:16:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/21/Mian%E5%87%BD%E6%95%B0%E5%B8%A6%E5%8F%82/">Mian函数带参</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">FreeRTOS</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">main函数参数</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/19/C%E8%AF%AD%E8%A8%80fopen%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2020-08-18T16:11:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/19/C%E8%AF%AD%E8%A8%80fopen%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0/">C语言fopen（）函数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">fopen()</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">STM32CUBEIDE</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">STM32标准库</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/13/FreeRTOS%E8%AE%B0%E5%BD%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/15/photo/" class="archive-article-date">
-  	<time datetime="2020-08-14T17:01:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-15</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/09/01/74HC595/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">74HC595应用笔记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/15/photo/">photo</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/13/TCP-IP%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2020-08-13T14:37:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/13/TCP-IP%E7%AC%94%E8%AE%B0/">IWIP TCP/IP笔记</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">IWIP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">TCP/IP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">socket</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -394,8 +356,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
