@@ -6,15 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 74HC595 | zzq_blog</title>
+  <title>STM32CUBEIDE标准库移植 | zzq_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zzq_blog">
-<meta property="og:url" content="http://yoursite.com/tags/74HC595/index.html">
+  <meta name="description" content="STM32CUBEIDE平台使用标准库移植问题记录移植FreeRTOS过程中无法进入任务调度，卡在HardFault_Handler函数中123456789    &#x2F;**  * @brief  This function handles Hard Fault exception.  * @param  None  * @retval None  *&#x2F;void HardFault_Handler(v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32CUBEIDE标准库移植">
+<meta property="og:url" content="http://yoursite.com/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/index.html">
 <meta property="og:site_name" content="zzq_blog">
+<meta property="og:description" content="STM32CUBEIDE平台使用标准库移植问题记录移植FreeRTOS过程中无法进入任务调度，卡在HardFault_Handler函数中123456789    &#x2F;**  * @brief  This function handles Hard Fault exception.  * @param  None  * @retval None  *&#x2F;void HardFault_Handler(v">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/portmacro.h.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/timer.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/channel.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/flash.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/section.jpg">
+<meta property="article:published_time" content="2020-09-20T11:22:22.000Z">
+<meta property="article:modified_time" content="2020-09-20T12:15:59.250Z">
 <meta property="article:author" content="Mr Zhongzhiqiang">
+<meta property="article:tag" content="STM32标准库">
+<meta property="article:tag" content="STM32BUBEIDE">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/portmacro.h.jpg">
   
     <link rel="alternative" href="/atom.xml" title="zzq_blog" type="application/atom+xml">
   
@@ -151,59 +164,177 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-STM32CUBEIDE标准库移植" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/01/74HC595/" class="archive-article-date">
-  	<time datetime="2020-09-01T15:38:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-01</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/01/74HC595/">74HC595应用笔记</a>
+    <h1 class="article-title" itemprop="name">
+      STM32CUBEIDE标准库移植
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/" class="archive-article-date">
+  	<time datetime="2020-09-20T11:22:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="STM32CUBEIDE平台使用标准库移植问题记录"><a href="#STM32CUBEIDE平台使用标准库移植问题记录" class="headerlink" title="STM32CUBEIDE平台使用标准库移植问题记录"></a>STM32CUBEIDE平台使用标准库移植问题记录</h1><h3 id="移植FreeRTOS过程中无法进入任务调度，卡在HardFault-Handler函数中"><a href="#移植FreeRTOS过程中无法进入任务调度，卡在HardFault-Handler函数中" class="headerlink" title="移植FreeRTOS过程中无法进入任务调度，卡在HardFault_Handler函数中"></a>移植FreeRTOS过程中无法进入任务调度，卡在<code>HardFault_Handler</code>函数中</h3><pre><code><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  This function handles Hard Fault exception.</span></span><br><span class="line"><span class="comment">  * @param  None</span></span><br><span class="line"><span class="comment">  * @retval None</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HardFault_Handler</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> LED_SF_ENABLE();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+问题原因有多种 网上有很多是因为堆栈溢出或者分配导致得原因，对于该原因不过多概述，本次遇到得问题是因为没用找到对应中断函数而导致进`HardFault_Handler`函数，这个问题来源于一次调试中发现设备跳到对应得port.c的中断函数导致的进`HardFault_Handler`中断异常</code></pre><h4 id="解决方式：打开portmacro-h文件-在文件中加入对应如下的FreeRTOS系统中断函数的宏定义，让系统找到该函数解决"><a href="#解决方式：打开portmacro-h文件-在文件中加入对应如下的FreeRTOS系统中断函数的宏定义，让系统找到该函数解决" class="headerlink" title="解决方式：打开portmacro.h文件 在文件中加入对应如下的FreeRTOS系统中断函数的宏定义，让系统找到该函数解决"></a>解决方式：打开<code>portmacro.h</code>文件 在文件中加入对应如下的FreeRTOS系统中断函数的宏定义，让系统找到该函数解决</h4><pre><code><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> vPortSVCHandler SVC_Handler</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> xPortSysTickHandler SysTick_Handler</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> xPortPendSVHandler PendSV_Handler</span></span><br></pre></td></tr></table></figure></code></pre><p><img src="/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/portmacro.h.jpg" alt="portmacro.h"><br><img src="/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/1.jpg" alt="1"></p>
+<h3 id="timertest-c报错"><a href="#timertest-c报错" class="headerlink" title="timertest.c报错"></a><code>timertest.c</code>报错</h3><h4 id="include-quot-stm32f10x-lib-h-quot-文件找不到"><a href="#include-quot-stm32f10x-lib-h-quot-文件找不到" class="headerlink" title="include &quot;stm32f10x_lib.h&quot;文件找不到"></a><code>include &quot;stm32f10x_lib.h&quot;</code>文件找不到</h4><pre><code>`stm32f10x_lib.h`，`stm32f10x_tim.h`，`stm32f10x_map.h`是ST公司V2.0版本的库函数使用的头文件，在V3.5版本的库函数中已经将这三个头文件更换为`stm32f10x.h`文件，所以将这三个文件注释掉直接引用`stm32f10x.h`，更改timertest.c文件定义的TIM2中断中的中断通道</code></pre><p><img src="/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/timer.jpg" alt="timer"><br><img src="/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/channel.jpg" alt="channel"></p>
+<h3 id="在STM32CUBEIDE中将变量存放在指定的地址中"><a href="#在STM32CUBEIDE中将变量存放在指定的地址中" class="headerlink" title="在STM32CUBEIDE中将变量存放在指定的地址中"></a>在STM32CUBEIDE中将变量存放在指定的地址中</h3><h4 id="因为STM32CUBEIDE使用的是GCC编译器，之前在Keil上的语法不再适用"><a href="#因为STM32CUBEIDE使用的是GCC编译器，之前在Keil上的语法不再适用" class="headerlink" title="因为STM32CUBEIDE使用的是GCC编译器，之前在Keil上的语法不再适用"></a>因为STM32CUBEIDE使用的是GCC编译器，之前在Keil上的语法不再适用</h4><pre><code>首先定义需要存放在指定地址的变量
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span>	<span class="keyword">uint8_t</span>		Fill_blank[<span class="number">50</span>] __attribute__((section(<span class="string">".ROM2"</span>)))=&#123;<span class="string">"填写需要放的数据或者值或者结构体信息"</span>&#125;;</span><br><span class="line"><span class="comment">//其中Fill_blank[50]是自己定义的一个字符串数组，我们将这个数据存放在ROM2这个地址上</span></span><br><span class="line"><span class="comment">//ROM2：存放的地址</span></span><br></pre></td></tr></table></figure>
+进入GCC的linker文件：`STM32F103XXXX_FLASH.ld`，中，定义ROM2的地址：
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    MEMORY</span><br><span class="line">&#123;</span><br><span class="line">  RAM    (xrw)    : ORIGIN = <span class="number">0x20000000</span>,   LENGTH = <span class="number">64</span>K</span><br><span class="line">  ROM    (rx)    : ORIGIN = <span class="number">0x8010000</span>,   LENGTH = <span class="number">444</span>K</span><br><span class="line">  ROM2   (rx)    : ORIGIN = <span class="number">0x807f000</span>,   LENGTH = <span class="number">4</span>K</span><br><span class="line">  <span class="comment">//我使用的平台是STM32F103RET6  flash的容量是512K,使用0x10000用于IAP部分，我们将ROM2放在0x807f000的位置上，一定要计算清除地址和大小</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p><img src="/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/flash.jpg" alt="flash"><br>    在SECTIONS中使用该地址<br>    <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.ROM2 : ALIGN(<span class="number">4</span>)</span><br><span class="line">&#123;</span><br><span class="line">    FILL(<span class="number">0xff</span>)</span><br><span class="line">    KEEP(*(.ROM2))</span><br><span class="line">&#125; &gt; ROM2</span><br></pre></td></tr></table></figure><br><img src="/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/section.jpg" alt="section"></p>
+<h4 id="对于有没有将变量使用存放成功，可以编译固件HEX-或者bin文件，通过JFLASH打开，找到对应地址即可查看有没有存放成功！"><a href="#对于有没有将变量使用存放成功，可以编译固件HEX-或者bin文件，通过JFLASH打开，找到对应地址即可查看有没有存放成功！" class="headerlink" title="对于有没有将变量使用存放成功，可以编译固件HEX 或者bin文件，通过JFLASH打开，找到对应地址即可查看有没有存放成功！"></a>对于有没有将变量使用存放成功，可以编译固件HEX 或者bin文件，通过JFLASH打开，找到对应地址即可查看有没有存放成功！</h4>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">74HC595</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">STM32标准库</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">STM32BUBEIDE</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/20/STM32CUBEIDE%E6%A0%87%E5%87%86%E5%BA%93%E7%A7%BB%E6%A4%8D/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/09/13/FreeRTOS%E8%AE%B0%E5%BD%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">FreeRTOS记录</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -226,9 +357,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
