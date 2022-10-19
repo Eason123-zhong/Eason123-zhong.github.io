@@ -15,15 +15,15 @@
 <meta property="og:site_name" content="zzq_blog">
 <meta property="og:description" content="循环队列">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/%E7%A9%BA%E9%98%9F%E5%88%97.png">
-<meta property="og:image" content="http://yoursite.com/%E6%BB%A1%E9%98%9F%E5%88%97.png">
-<meta property="og:image" content="http://yoursite.com/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97.gif">
+<meta property="og:image" content="http://yoursite.com/2022/10/17/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97/%E7%A9%BA%E9%98%9F%E5%88%97.png">
+<meta property="og:image" content="http://yoursite.com/2022/10/17/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97/%E6%BB%A1%E9%98%9F%E5%88%97.png">
+<meta property="og:image" content="http://yoursite.com/2022/10/17/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97.gif">
 <meta property="article:published_time" content="2022-10-17T14:46:31.000Z">
-<meta property="article:modified_time" content="2022-10-19T16:33:39.889Z">
+<meta property="article:modified_time" content="2022-10-19T16:52:03.215Z">
 <meta property="article:author" content="Mr Zhongzhiqiang">
 <meta property="article:tag" content="-C语言 -数据结构 -队列">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/%E7%A9%BA%E9%98%9F%E5%88%97.png">
+<meta name="twitter:image" content="http://yoursite.com/2022/10/17/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97/%E7%A9%BA%E9%98%9F%E5%88%97.png">
   
     <link rel="alternative" href="/atom.xml" title="zzq_blog" type="application/atom+xml">
   
@@ -183,13 +183,13 @@
         <h1 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列<a id="more"></a></h1><p>[TOC]</p>
 <h2 id="一-定义"><a href="#一-定义" class="headerlink" title="一 定义"></a>一 定义</h2><h3 id="1：循环队列简介"><a href="#1：循环队列简介" class="headerlink" title="1：循环队列简介"></a>1：循环队列简介</h3><p>循环对列使用顺序表实现，与链式队列不同处在于，循环队列的空间是可以循环使用的。循环队列一般有固定的容量，在使用上遵循队列使用原则，队列的元素必须从队尾进入，从队首出列。为了使用方便，我们将创建一个长度为7 单位的循环队列存储空间，下面不同情况的循环队列在下图中进行表示。front 表示 队首位置  back 表示队尾位置。</p>
 <p><em>注意：front 永远指向队首元素，back永远指向队尾空闲空间，那么当front 与back 指向同一个位置的时候（注定该位置为空），所以可以判断这个队列是空的队列！！！</em></p>
-<p><img src="/%E7%A9%BA%E9%98%9F%E5%88%97.png" alt></p>
+<p><img src="/2022/10/17/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97/%E7%A9%BA%E9%98%9F%E5%88%97.png" alt></p>
 <hr>
 <p>满队列如下图所示，因为back永远指向空地址空间（为了判断是否是满队列），故实际可以使用的空间为最大申请空间 -1 长度。下图可用空间为7 -1 = 6个空间。</p>
-<p><img src="/%E6%BB%A1%E9%98%9F%E5%88%97.png" alt></p>
+<p><img src="/2022/10/17/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97/%E6%BB%A1%E9%98%9F%E5%88%97.png" alt></p>
 <hr>
 <p>大概操作示意如下图所示：</p>
-<p><img src="/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97.gif" alt="循环队列操作演示"></p>
+<p><img src="/2022/10/17/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97.gif" alt="循环队列操作演示"></p>
 <hr>
 <h3 id="2：循环队列结构定义"><a href="#2：循环队列结构定义" class="headerlink" title="2：循环队列结构定义"></a>2：循环队列结构定义</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 循环队列结构定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span>* buf;                  <span class="comment">// 缓存buf  同时默认当前存储类型为int</span></span><br><span class="line">	<span class="keyword">int</span>  fornt;                <span class="comment">// 队头</span></span><br><span class="line">	<span class="keyword">int</span>  rear;                 <span class="comment">// 队尾</span></span><br><span class="line">	<span class="keyword">int</span> max_size;              <span class="comment">// 队列大小</span></span><br><span class="line">&#125;_queue_type;</span><br></pre></td></tr></table></figure>
 
@@ -437,14 +437,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fopen()</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">FreeRTOS</a>
               </li>
              
@@ -457,7 +449,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">STM32BUBEIDE</a>
+                <a href="javascript:void(0)" class="js-tag color3">fopen()</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -465,7 +461,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color3">STM32BUBEIDE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -481,15 +477,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">测试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-C语言 -数据结构 -队列</a>
+                <a href="javascript:void(0)" class="js-tag color5">-C语言 -大小端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-C语言 -大小端</a>
+                <a href="javascript:void(0)" class="js-tag color5">-C语言 -数据结构 -队列</a>
               </li>
             
             <div class="clearfix"></div>
