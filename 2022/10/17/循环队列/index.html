@@ -6,15 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>zzq_blog</title>
+  <title>循环队列 | zzq_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zzq_blog">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+  <meta name="description" content="循环队列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="循环队列">
+<meta property="og:url" content="http://yoursite.com/2022/10/17/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97/index.html">
 <meta property="og:site_name" content="zzq_blog">
+<meta property="og:description" content="循环队列">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/%E7%A9%BA%E9%98%9F%E5%88%97.png">
+<meta property="og:image" content="http://yoursite.com/%E6%BB%A1%E9%98%9F%E5%88%97.png">
+<meta property="og:image" content="http://yoursite.com/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97.gif">
+<meta property="article:published_time" content="2022-10-17T14:46:31.000Z">
+<meta property="article:modified_time" content="2022-10-19T16:33:39.889Z">
 <meta property="article:author" content="Mr Zhongzhiqiang">
+<meta property="article:tag" content="-C语言 -数据结构 -队列">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/%E7%A9%BA%E9%98%9F%E5%88%97.png">
   
     <link rel="alternative" href="/atom.xml" title="zzq_blog" type="application/atom+xml">
   
@@ -151,33 +160,71 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-    <article id="post-TCP-IP笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+<article id="post-循环队列" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/13/TCP-IP%E7%AC%94%E8%AE%B0/">IWIP TCP/IP笔记</a>
+    <h1 class="article-title" itemprop="name">
+      循环队列
     </h1>
   
 
         
-        <a href="/2020/08/13/TCP-IP%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2020-08-13T14:37:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-13</time>
+        <a href="/2022/10/17/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97/" class="archive-article-date">
+  	<time datetime="2022-10-17T14:46:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="文章概述"><a href="#文章概述" class="headerlink" title="文章概述"></a>文章概述</h1>
-        
-          <a class="article-more-a" href="/2020/08/13/TCP-IP%E7%AC%94%E8%AE%B0/#more">more >></a>
-        
+        <h1 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列<a id="more"></a></h1><p>[TOC]</p>
+<h2 id="一-定义"><a href="#一-定义" class="headerlink" title="一 定义"></a>一 定义</h2><h3 id="1：循环队列简介"><a href="#1：循环队列简介" class="headerlink" title="1：循环队列简介"></a>1：循环队列简介</h3><p>循环对列使用顺序表实现，与链式队列不同处在于，循环队列的空间是可以循环使用的。循环队列一般有固定的容量，在使用上遵循队列使用原则，队列的元素必须从队尾进入，从队首出列。为了使用方便，我们将创建一个长度为7 单位的循环队列存储空间，下面不同情况的循环队列在下图中进行表示。front 表示 队首位置  back 表示队尾位置。</p>
+<p><em>注意：front 永远指向队首元素，back永远指向队尾空闲空间，那么当front 与back 指向同一个位置的时候（注定该位置为空），所以可以判断这个队列是空的队列！！！</em></p>
+<p><img src="/%E7%A9%BA%E9%98%9F%E5%88%97.png" alt></p>
+<hr>
+<p>满队列如下图所示，因为back永远指向空地址空间（为了判断是否是满队列），故实际可以使用的空间为最大申请空间 -1 长度。下图可用空间为7 -1 = 6个空间。</p>
+<p><img src="/%E6%BB%A1%E9%98%9F%E5%88%97.png" alt></p>
+<hr>
+<p>大概操作示意如下图所示：</p>
+<p><img src="/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97.gif" alt="循环队列操作演示"></p>
+<hr>
+<h3 id="2：循环队列结构定义"><a href="#2：循环队列结构定义" class="headerlink" title="2：循环队列结构定义"></a>2：循环队列结构定义</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 循环队列结构定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span>* buf;                  <span class="comment">// 缓存buf  同时默认当前存储类型为int</span></span><br><span class="line">	<span class="keyword">int</span>  fornt;                <span class="comment">// 队头</span></span><br><span class="line">	<span class="keyword">int</span>  rear;                 <span class="comment">// 队尾</span></span><br><span class="line">	<span class="keyword">int</span> max_size;              <span class="comment">// 队列大小</span></span><br><span class="line">&#125;_queue_type;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-循环队列-C-函数实现"><a href="#二-循环队列-C-函数实现" class="headerlink" title="二 循环队列 C 函数实现"></a>二 循环队列 C 函数实现</h2><h3 id="1：初始化一个队列"><a href="#1：初始化一个队列" class="headerlink" title="1：初始化一个队列"></a>1：初始化一个队列</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化一个队列</span></span><br><span class="line"><span class="comment">// queue: 等待初始化的队列指针</span></span><br><span class="line"><span class="comment">// queue_sieze : 需要初始化的大小</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_queue</span><span class="params">(_queue_type *<span class="built_in">queue</span>,<span class="keyword">int</span> queue_size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">queue</span>-&gt;buf = <span class="built_in">malloc</span>(queue_size * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">	<span class="keyword">if</span> (!<span class="built_in">queue</span>-&gt;buf) &#123; <span class="built_in">printf</span>(<span class="string">"队列内存分配错误\r\n"</span>); <span class="keyword">return</span>; &#125;</span><br><span class="line">	<span class="built_in">queue</span>-&gt;fornt = <span class="built_in">queue</span>-&gt;rear = <span class="number">0</span>;                           <span class="comment">// 对头队尾指向起始0 空队列</span></span><br><span class="line">	<span class="built_in">queue</span>-&gt;max_size = queue_size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2：入队操作"><a href="#2：入队操作" class="headerlink" title="2：入队操作"></a>2：入队操作</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单个 元素入队</span></span><br><span class="line"><span class="comment">// 从队尾入队列</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">in_queue</span><span class="params">(_queue_type* <span class="built_in">queue</span>, <span class="keyword">int</span> elem)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ((<span class="built_in">queue</span>-&gt;rear + <span class="number">1</span>) % <span class="built_in">queue</span>-&gt;max_size == <span class="built_in">queue</span>-&gt;fornt) &#123; <span class="built_in">printf</span>(<span class="string">"队列满了 \r\n"</span>); <span class="keyword">return</span>; &#125;;    <span class="comment">// 队尾指针始终为空</span></span><br><span class="line">	<span class="built_in">queue</span>-&gt;buf[<span class="built_in">queue</span>-&gt;rear] = elem;</span><br><span class="line">	<span class="built_in">queue</span>-&gt;rear = (<span class="built_in">queue</span>-&gt;rear + <span class="number">1</span>) % <span class="built_in">queue</span>-&gt;max_size;              <span class="comment">// 队尾指向 下一个空闲空间 循环关键</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-出队操作"><a href="#3-出队操作" class="headerlink" title="3: 出队操作"></a>3: 出队操作</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单个元素出列</span></span><br><span class="line"><span class="comment">// 从队首 出列</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">out_queue</span><span class="params">(_queue_type* <span class="built_in">queue</span>, <span class="keyword">int</span>* elem)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">queue</span>-&gt;fornt == <span class="built_in">queue</span>-&gt;rear) &#123; <span class="built_in">printf</span>(<span class="string">"空队列\r\n"</span>); <span class="keyword">return</span>; &#125;</span><br><span class="line">	*elem = <span class="built_in">queue</span>-&gt;buf[<span class="built_in">queue</span>-&gt;fornt];</span><br><span class="line">	<span class="built_in">queue</span>-&gt;fornt = (<span class="built_in">queue</span>-&gt;fornt + <span class="number">1</span>) % <span class="built_in">queue</span>-&gt;max_size;            </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-队列验证"><a href="#4-队列验证" class="headerlink" title="4: 队列验证"></a>4: 队列验证</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 循环队列测试</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> test = <span class="number">0</span>;</span><br><span class="line">	_queue_type myqueue;</span><br><span class="line">	init_queue(&amp;myqueue,<span class="number">100</span>);</span><br><span class="line">	out_queue(&amp;myqueue, &amp;test);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> ii = <span class="number">0</span>; ii &lt; <span class="number">10</span>; ii++)</span><br><span class="line">	&#123;</span><br><span class="line">		in_queue(&amp;myqueue,ii + <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> a = <span class="number">0</span>; a &lt; <span class="number">10</span>; a++)</span><br><span class="line">	&#123;</span><br><span class="line">		out_queue(&amp;myqueue, &amp;test);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\r\n"</span>,test);</span><br><span class="line">	&#125;</span><br><span class="line">	out_queue(&amp;myqueue, &amp;test);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -188,15 +235,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">IWIP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">TCP/IP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">socket</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">-C语言 -数据结构 -队列</a>
         		</li>
       		
 		</ul>
@@ -205,16 +244,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/13/TCP-IP%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2022/10/17/%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2022/10/04/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%98%9F%E5%88%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构-队列</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -234,163 +332,14 @@
 
 
 
-
-  
-    <article id="post-博客文章测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/16/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E6%B5%8B%E8%AF%95/">博客文章测试</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/16/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E6%B5%8B%E8%AF%95/" class="archive-article-date">
-  	<time datetime="2020-07-15T18:02:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="第一篇博客测试"><a href="#第一篇博客测试" class="headerlink" title="第一篇博客测试"></a>第一篇博客测试</h2>
-        
-          <a class="article-more-a" href="/2020/07/16/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E6%B5%8B%E8%AF%95/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/16/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E6%B5%8B%E8%AF%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/16/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/16/hello-world/" class="archive-article-date">
-  	<time datetime="2020-07-15T17:53:48.006Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/16/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -413,8 +362,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
